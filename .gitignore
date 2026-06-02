@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Plan files
+DEVELOPMENT_PLAN.md
+
+# PDF files
+*.pdf
+
+# github
+.github/
