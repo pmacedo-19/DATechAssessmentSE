@@ -238,3 +238,4 @@ build/
 *.egg-info/
 .ruff_cache/
 uv.lock
+.github/copilot-instructions.md
