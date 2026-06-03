@@ -82,13 +82,22 @@ select = [
 python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
-disallow_untyped_defs = false
+warn_unused_ignores = true
+disallow_untyped_defs = false  # Don't require all functions typed
+disallow_incomplete_defs = false
+check_untyped_defs = true
 ignore_missing_imports = true
+strict_optional = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "--cov=src --cov-report=html --cov-report=term-missing"
+addopts = "--strict-markers"
 testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
+markers = [
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "slow: marks tests as slow",
+]
