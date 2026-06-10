@@ -71,9 +71,9 @@ def main() -> None:
         df.to_csv(output_csv, index=False)
 
         # Step 4: Upload
-        #logger.info("Step 4: Uploading to cloud storage")
-        #storage = StorageFactory.create(storage_path)
-        #storage.upload(output_csv, storage_path)
+        # logger.info("Step 4: Uploading to cloud storage")
+        # storage = StorageFactory.create(storage_path)
+        # storage.upload(output_csv, storage_path)
 
         logger.info("Pipeline completed successfully")
 
