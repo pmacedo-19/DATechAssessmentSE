@@ -71,7 +71,7 @@ class ESMADataDownloader:
             self.logger.info(f"Found {len(docs)} doc elements in XML")
 
             dltins_urls = []
-
+  
             # Extract DLTINS URLs from docs
             for doc in docs:
                 file_type = None
@@ -97,7 +97,6 @@ class ESMADataDownloader:
             # Use 2nd if available, otherwise use 1st
             file_index = min(1, len(dltins_urls) - 1)
             selected_url = dltins_urls[file_index]
-
             self.logger.info(
                 f"Using DLTINS file {file_index + 1} of {len(dltins_urls)}"
             )
