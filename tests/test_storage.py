@@ -1,6 +1,7 @@
 from unittest.mock import Mock, patch
 
 import pytest
+
 from esma_data_processor.storage import (
     AzureStorage,
     S3Storage,

@@ -1,4 +1,5 @@
 import pytest
+
 from esma_data_processor.parser import ParseError, XMLParser
 
 
