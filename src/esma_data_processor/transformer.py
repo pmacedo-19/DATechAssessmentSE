@@ -21,11 +21,11 @@ class DataTransformer:
     """
 
     REQUIRED_COLUMNS = [
-        "FinInstrmGnlAttrbts.Id",
-        "FinInstrmGnlAttrbts.FullNm",
-        "FinInstrmGnlAttrbts.ClssfctnTp",
-        "FinInstrmGnlAttrbts.CmmdtyDerivInd",
-        "FinInstrmGnlAttrbts.NtnlCcy",
+        "Id",
+        "FullNm",
+        "ClssfctnTp",
+        "CmmdtyDerivInd",
+        "NtnlCcy",
         "Issr",
     ]
 
@@ -80,11 +80,11 @@ class DataTransformer:
         try:
             self.logger.info("Adding 'a_count' column")
 
-            if "FinInstrmGnlAttrbts.FullNm" not in df.columns:
-                raise TransformError("FinInstrmGnlAttrbts.FullNm column not found")
+            if "FullNm" not in df.columns:
+                raise TransformError("FullNm column not found")
 
             df["a_count"] = (
-                df["FinInstrmGnlAttrbts.FullNm"]
+                df["FullNm"]
                 .str.lower()
                 .str.count("a")
                 .fillna(0)

@@ -66,19 +66,40 @@ class ESMADataDownloader:
         try:
             self.logger.info("Parsing XML for DLTINS download link")
             root = etree.fromstring(xml.encode())
+            # Find all doc elements
+            docs = root.xpath('//doc')
+            self.logger.info(f"Found {len(docs)} doc elements in XML")
+            
+            dltins_urls = []
+            
+            # Extract DLTINS URLs from docs
+            for doc in docs:
+                file_type = None
+                download_link = None
+                
+                # Find file_type and download_link in str elements
+                for str_elem in doc.findall('str'):
+                    name_attr = str_elem.get('name')
+                    
+                    if name_attr == 'file_type' and str_elem.text == 'DLTINS':
+                        file_type = str_elem.text
+                    elif name_attr == 'download_link':
+                        download_link = str_elem.text
+                
+                # If this is a DLTINS file, save the URL
+                if file_type == 'DLTINS' and download_link:
+                    dltins_urls.append(download_link)
+                    self.logger.info(f"Found DLTINS URL: {download_link}")
+            
+            if len(dltins_urls) == 0:
+                raise DownloadError("No DLTINS files found in XML")
 
-            # XPath to find DLTINS files
-            dltins_files = root.xpath('//file[@file_type="DLTINS"]')
-
-            if len(dltins_files) < 2:
-                raise DownloadError("Could not find 2nd DLTINS file in XML")
-
-            # Get the second DLTINS file
-            url_elem = dltins_files[1].find("url")
-            if url_elem is None or url_elem.text is None:
-                raise DownloadError("URL element not found in DLTINS file")
-
-            return url_elem.text
+            # Use 2nd if available, otherwise use 1st
+            file_index = min(1, len(dltins_urls) - 1)
+            selected_url = dltins_urls[file_index]
+            
+            self.logger.info(f"Using DLTINS file {file_index + 1} of {len(dltins_urls)}")
+            return selected_url
         except etree.XMLSyntaxError as e:
             raise DownloadError(f"Invalid XML: {e}")
 
