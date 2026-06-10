@@ -66,7 +66,6 @@ class ESMADataDownloader:
         try:
             self.logger.info("Parsing XML for DLTINS download link")
             root = etree.fromstring(xml.encode())
-
             # Find all doc elements
             docs = root.xpath('//doc')
             self.logger.info(f"Found {len(docs)} doc elements in XML")
