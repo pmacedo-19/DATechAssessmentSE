@@ -1,6 +1,5 @@
 import pandas as pd
 import pytest
-
 from esma_data_processor.transformer import (
     DataTransformer,
     TransformError,

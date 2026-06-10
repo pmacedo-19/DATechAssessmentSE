@@ -3,7 +3,6 @@ import os
 import sys
 
 from dotenv import load_dotenv
-
 from esma_data_processor.downloader import DownloadError, ESMADataDownloader
 from esma_data_processor.parser import ParseError, XMLParser
 from esma_data_processor.storage import StorageError
@@ -71,9 +70,9 @@ def main() -> None:
         df.to_csv(output_csv, index=False)
 
         # Step 4: Upload
-        #logger.info("Step 4: Uploading to cloud storage")
-        #storage = StorageFactory.create(storage_path)
-        #storage.upload(output_csv, storage_path)
+        # logger.info("Step 4: Uploading to cloud storage")
+        # storage = StorageFactory.create(storage_path)
+        # storage.upload(output_csv, storage_path)
 
         logger.info("Pipeline completed successfully")
 

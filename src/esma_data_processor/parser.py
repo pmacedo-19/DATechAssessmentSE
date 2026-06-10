@@ -36,9 +36,7 @@ class XMLParser:
         """
         return tag.split("}")[-1] if "}" in tag else tag
 
-    def _find_element_by_tag(
-        self, parent: Any, tag_name: str
-    ) -> Optional[Any]:
+    def _find_element_by_tag(self, parent: Any, tag_name: str) -> Optional[Any]:
         """Find first child element with given tag name (ignoring namespace).
 
         Args:
@@ -53,9 +51,7 @@ class XMLParser:
                 return child
         return None
 
-    def _find_all_elements_by_tag(
-        self, parent: Any, tag_name: str
-    ) -> List[Any]:
+    def _find_all_elements_by_tag(self, parent: Any, tag_name: str) -> List[Any]:
         """Find all direct child elements with given tag name (ignoring namespace).
 
         Args:
@@ -103,9 +99,7 @@ class XMLParser:
                 self.logger.warning("No Document element found in Pyld")
                 return data
 
-            rpt = self._find_element_by_tag(
-                document, "FinInstrmRptgRefDataDltaRpt"
-            )
+            rpt = self._find_element_by_tag(document, "FinInstrmRptgRefDataDltaRpt")
             if not rpt:
                 self.logger.warning(
                     "No FinInstrmRptgRefDataDltaRpt element found in Document"

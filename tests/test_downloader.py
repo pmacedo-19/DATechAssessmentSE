@@ -4,7 +4,6 @@ from unittest.mock import Mock, patch
 
 import pytest
 import requests
-
 from esma_data_processor.downloader import (
     DownloadError,
     ESMADataDownloader,
