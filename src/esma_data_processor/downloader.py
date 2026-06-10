@@ -69,35 +69,35 @@ class ESMADataDownloader:
             # Find all doc elements
             docs = root.xpath('//doc')
             self.logger.info(f"Found {len(docs)} doc elements in XML")
-            
+
             dltins_urls = []
-            
+
             # Extract DLTINS URLs from docs
             for doc in docs:
                 file_type = None
                 download_link = None
-                
+
                 # Find file_type and download_link in str elements
                 for str_elem in doc.findall('str'):
                     name_attr = str_elem.get('name')
-                    
+
                     if name_attr == 'file_type' and str_elem.text == 'DLTINS':
                         file_type = str_elem.text
                     elif name_attr == 'download_link':
                         download_link = str_elem.text
-                
+
                 # If this is a DLTINS file, save the URL
                 if file_type == 'DLTINS' and download_link:
                     dltins_urls.append(download_link)
                     self.logger.info(f"Found DLTINS URL: {download_link}")
-            
+
             if len(dltins_urls) == 0:
                 raise DownloadError("No DLTINS files found in XML")
 
             # Use 2nd if available, otherwise use 1st
             file_index = min(1, len(dltins_urls) - 1)
             selected_url = dltins_urls[file_index]
-            
+
             self.logger.info(f"Using DLTINS file {file_index + 1} of {len(dltins_urls)}")
             return selected_url
         except etree.XMLSyntaxError as e:

@@ -70,7 +70,7 @@ class XMLParser:
             if self._strip_namespace(child.tag) == tag_name:
                 results.append(child)
         return results
-      
+
     def parse_financial_data(self, xml_path: str) -> List[Dict[str, str]]:
         """Parse DLTINS XML file and extract financial instrument data.
 
